@@ -1,0 +1,13 @@
+.idea
+*.iml
+out
+/.apt_generated/
+/.classpath
+/.factorypath
+/.project
+/.settings/
+/.springBeans
+/target/
+
+/user-profile-analysis.iml
+/.idea
