@@ -28,6 +28,13 @@ public class Lab1 implements Callable<Integer> {
         String processedText = TextProcessor.processTextFile(srcFile);
         DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
 
+        if(dstFile != null){
+            if(dstFile.toString().equalsIgnoreCase("."))
+                dstFile = new File("./directed_graph.png");
+            GenerateImg.generate(graph,dstFile);
+            System.out.printf("Generate Image of Graph at \"%s\" successfully\n\n",dstFile.getPath());
+        }
+
         if(showGraph){
             GraphConverter.showDirectedGraph(graph);
         }
