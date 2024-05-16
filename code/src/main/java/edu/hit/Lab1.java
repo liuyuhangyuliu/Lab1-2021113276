@@ -22,6 +22,12 @@ public class Lab1 implements Callable<Integer> {
     @CommandLine.Option(names = {"-d","--dst"},description = "absolute path of destination graph file")
     private File dstFile;
 
+    @CommandLine.Option(names = {"-q","--query"},description = "query bridge-word of word1 and word2(split with space)",interactive = true,echo = true)
+    private String words;
+
+
+
+
     @Override
     public Integer call() {
 
@@ -38,6 +44,19 @@ public class Lab1 implements Callable<Integer> {
         if(showGraph){
             GraphConverter.showDirectedGraph(graph);
         }
+
+        try{
+            String[] twoWords = words.split("\s+");
+            if(twoWords.length != 2)
+                throw new Exception("wrong number of query words");
+            System.out.println(graph.queryBridgeWords(twoWords[0],twoWords[1]));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
         return 0;
     }
 
