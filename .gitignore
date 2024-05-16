@@ -8,7 +8,7 @@ out
 /.project
 /.settings/
 /.springBeans
-/target/
+code/target/
 
 /user-profile-analysis.iml
 /.idea
