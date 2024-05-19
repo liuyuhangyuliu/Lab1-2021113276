@@ -28,6 +28,8 @@ public class Lab1 implements Callable<Integer> {
     @CommandLine.Option(names = {"-i","--insert"},description = "query bridge-words and generate new text by input(split with space)",interactive = true,echo = true)
     private String inputText;
 
+    @CommandLine.Option(names = {"-c","--calculate"},description = "calculate shortest path of given words(split with space)",interactive = true,echo = true)
+    private String calcWords;
 
 
 
@@ -65,6 +67,18 @@ public class Lab1 implements Callable<Integer> {
         if(inputText != null){
             System.out.println("Generate new text :");
             System.out.println(graph.generateNewText(inputText));
+
+        }
+
+        if(calcWords != null){
+            try{
+                String[] twoWords = calcWords.split("\s+");
+                if(twoWords.length != 2)
+                    throw new Exception("wrong number of calculate words");
+                System.out.println(graph.calcShortestPath(twoWords[0],twoWords[1]));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
 

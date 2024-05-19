@@ -58,5 +58,66 @@ public class DirectedGraph extends HashMap<String,Map<String,Integer>>{
         return String.join(" ",list);
     }
 
+    public String calcShortestPath(String word1, String word2) {
+        // 初始化距离和前驱节点映射
+        Map<String, Integer> distances = new HashMap<>();
+        Map<String, String> predecessors = new HashMap<>();
+        for (String vertex : this.keySet()) {
+            distances.put(vertex, Integer.MAX_VALUE);
+            predecessors.put(vertex, null);
+        }
+        distances.put(word1, 0);
+
+        // 存储未访问顶点集合
+        PriorityQueue<String> pq = new PriorityQueue<>(Comparator.comparingInt(distances::get));
+        pq.addAll(this.keySet());
+
+        while (!pq.isEmpty()) {
+            // 选择当前未访问顶点中距离最小的顶点
+            String current = pq.poll();
+
+            // 如果已经找到目标顶点，可以提前结束
+            if (current.equals(word2)) break;
+
+            // 遍历当前顶点的所有邻居
+            for (Map.Entry<String, Integer> neighborEntry : this.get(current).entrySet()) {
+                String neighbor = neighborEntry.getKey();
+                int edgeWeight = neighborEntry.getValue();
+
+                // 计算通过当前顶点到达邻居的路径长度
+                int newDistance = distances.get(current) + edgeWeight;
+
+                // 如果新路径更短，更新距离和前驱节点
+                if (newDistance < distances.get(neighbor)) {
+                    distances.put(neighbor, newDistance);
+                    predecessors.put(neighbor, current);
+                    // 由于我们使用了优先队列，需要重新调整邻居在队列中的位置
+                    pq.remove(neighbor);
+                    pq.offer(neighbor);
+                }
+            }
+        }
+
+        // 打印结果
+        if (distances.get(word2) == Integer.MAX_VALUE) {
+           return("No path exists from " + word1 + " to " + word2);
+        } else {
+            //System.out.println("Shortest distance from " + word1 + " to " + word2 + " is: " + distances.get(word2));
+            List<String> path = buildPath(predecessors, word2);
+            Collections.reverse(path);
+            return("Shortest distance from " + word1 + " to " + word2 + " is: " + distances.get(word2) + "\nPath: " + String.join(" -> ", path));
+        }
+    }
+    
+    private static List<String> buildPath(Map<String, String> predecessors, String word2) {
+        List<String> path = new ArrayList<>();
+        String current = word2;
+        while (current != null) {
+            path.add(current);
+            current = predecessors.get(current);
+        }
+        return path;
+    }
+
 
 }
