@@ -25,6 +25,10 @@ public class Lab1 implements Callable<Integer> {
     @CommandLine.Option(names = {"-q","--query"},description = "query bridge-word of word1 and word2(split with space)",interactive = true,echo = true)
     private String words;
 
+    @CommandLine.Option(names = {"-i","--insert"},description = "query bridge-words and generate new text by input(split with space)",interactive = true,echo = true)
+    private String inputText;
+
+
 
 
 
@@ -45,16 +49,27 @@ public class Lab1 implements Callable<Integer> {
             GraphConverter.showDirectedGraph(graph);
         }
 
-        try{
-            String[] twoWords = words.split("\s+");
-            if(twoWords.length != 2)
-                throw new Exception("wrong number of query words");
-            System.out.println(graph.queryBridgeWords(twoWords[0],twoWords[1]));
+        if(words != null){
+            try{
+                String[] twoWords = words.split("\s+");
+                if(twoWords.length != 2)
+                    throw new Exception("wrong number of query words");
+                System.out.println(graph.queryBridgeWords(twoWords[0],twoWords[1]));
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }
+
+        if(inputText != null){
+            System.out.println("Generate new text :");
+            System.out.println(graph.generateNewText(inputText));
 
         }
+
+
+
 
 
         return 0;

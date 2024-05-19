@@ -1,7 +1,9 @@
+import edu.hit.Utils;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class test {
@@ -16,10 +18,10 @@ public class test {
 
     @Test
     public void Test1(){
-        HashMap<String, String> map = new HashMap<>();
-        map.put("key1","value1");
-        map.put("key2","value2");
-        new File(".");
+        List<String> list = Utils.getList("a b  c");
+        for(String s : list){
+            System.out.println(s);
+        }
 
     }
 }

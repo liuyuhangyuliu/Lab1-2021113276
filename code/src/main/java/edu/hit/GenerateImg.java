@@ -35,8 +35,9 @@ public class GenerateImg {
         try {
             Process process = Runtime.getRuntime().exec(command);
             process.waitFor(); // 等待命令执行完毕
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e ){
             e.printStackTrace();
         }
+
     }
 }
