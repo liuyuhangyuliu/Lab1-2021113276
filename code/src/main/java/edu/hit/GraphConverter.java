@@ -29,6 +29,13 @@ public class GraphConverter {
             neighbors.put(nextWord, neighbors.getOrDefault(nextWord, 0) + 1);
         }
 
+        String lastWord = words[words.length-1];
+
+        if (!graph.containsKey(lastWord)) {
+            graph.put(lastWord, new HashMap<>());
+        }
+
+
         return graph;
     }
 
