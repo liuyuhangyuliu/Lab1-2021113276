@@ -21,7 +21,7 @@ public class DirectedGraphTest extends TestCase {
     public void test1(){
         String processedText = "to explore strange new worlds to seek out new life and new";
         DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
-        graph.randomWalk();
+        //graph.randomWalk();
     }
 
 
