@@ -120,4 +120,57 @@ public class DirectedGraph extends HashMap<String,Map<String,Integer>>{
     }
 
 
+    public String randomWalk(){
+
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+
+        List<String> nodes = new ArrayList<>(this.keySet());
+        String currentNode = nodes.get(random.nextInt(nodes.size()));
+        Set<String> visitedNodesAndEdges = new HashSet<>();
+        visitedNodesAndEdges.add(currentNode + "->" + currentNode); // 初始化位置
+
+        StringBuilder pathBuilder = new StringBuilder(currentNode);
+
+        System.out.println("Current path: " + pathBuilder);
+
+
+        while (!this.get(currentNode).isEmpty()) {
+            if (this.containsKey(currentNode)) {
+
+                // 用户交互部分
+                System.out.print("Press 'y' to continue walking, any other key to stop: ");
+                String input = scanner.nextLine();
+                if (!input.equalsIgnoreCase("y")) {
+                    System.out.println("Walk stopped by user.");
+                    break;
+                }
+                // 随机选择下一个节点
+                List<String> neighbors = new ArrayList<>(this.get(currentNode).keySet());
+                String nextNode = neighbors.get(random.nextInt(neighbors.size()));
+
+                // 检查是否形成重复边
+                String nextEdge = currentNode + "->" + nextNode;
+                if (!visitedNodesAndEdges.contains(nextEdge)) {
+                    currentNode = nextNode;
+                    visitedNodesAndEdges.add(nextEdge);
+                    pathBuilder.append("->").append(currentNode);
+                    System.out.println("Current path: " + pathBuilder);
+                } else {
+                    // 如果形成重复边，则结束循环
+                    pathBuilder.append("->").append(nextNode);
+                    System.out.println("Current path: " + pathBuilder);
+                    System.out.println("Stopped due to reaching the first repeated edge.");
+                    break;
+                }
+            } else {
+                // 当前节点没有出度，结束循环
+                break;
+            }
+        }
+
+        return pathBuilder.toString();
+
+    }
+
 }

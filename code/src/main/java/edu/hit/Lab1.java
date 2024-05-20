@@ -4,6 +4,8 @@ package edu.hit;
 import picocli.CommandLine;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name="Lab1",version = "Lab1 1.0",mixinStandardHelpOptions = true)
@@ -30,6 +32,9 @@ public class Lab1 implements Callable<Integer> {
 
     @CommandLine.Option(names = {"-c","--calculate"},description = "calculate shortest path of given words(split with space)",interactive = true,echo = true)
     private String calcWords;
+
+    @CommandLine.Option(names = {"-r","--random"},description = "random walk and show randomPath and save randomPath as text at given absolute path")
+    private File randomWalkFile;
 
 
 
@@ -80,6 +85,14 @@ public class Lab1 implements Callable<Integer> {
                 e.printStackTrace();
             }
 
+        }
+        if(randomWalkFile != null){
+            String randomPath = graph.randomWalk();
+            try (FileWriter writer = new FileWriter(randomWalkFile)) {
+                writer.write(randomPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
