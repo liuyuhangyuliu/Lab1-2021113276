@@ -1,2 +1,3 @@
 seek->out->new->life->and->new->civilizations
-B1 change
+<<<<<<< HEAD
+B1 and C4 change

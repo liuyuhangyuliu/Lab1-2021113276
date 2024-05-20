@@ -18,4 +18,4 @@ text at given absolute path
 -s, --src=<srcFile>   absolute path of source text file
 --show            print DirectedGraph
 ```
-B1 change
+B1 and C4 change
