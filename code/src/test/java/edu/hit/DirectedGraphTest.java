@@ -1,12 +1,12 @@
 package edu.hit;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 
-import java.util.List;
+import java.io.File;
 
+import static org.junit.Assert.*;
 
-public class DirectedGraphTest extends TestCase {
+public class DirectedGraphTest{
 
     @Test
     public void test(){
@@ -25,6 +25,28 @@ public class DirectedGraphTest extends TestCase {
     }
 
 
-
-
+    @Test
+    public void queryBridgeWordsTest1() {
+        String word1 = "damn";
+        String word2 = "you";
+        String processedText = TextProcessor.processTextFile(new File("D:\\SElab\\lab1\\code\\testcase\\testcase1.txt"));
+        DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
+        assertEquals("No \"damn\" or \"you\" in the graph!",graph.queryBridgeWords(word1,word2));
+    }
+    @Test
+    public void queryBridgeWordsTest2() {
+        String word1 = "you";
+        String word2 = "damn";
+        String processedText = TextProcessor.processTextFile(new File("D:\\SElab\\lab1\\code\\testcase\\testcase1.txt"));
+        DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
+        assertEquals("No \"you\" or \"damn\" in the graph!",graph.queryBridgeWords(word1,word2));
+    }
+    @Test
+    public void queryBridgeWordsTest6() {
+        String word1 = "aiyo";
+        String word2 = "yoyo";
+        String processedText = TextProcessor.processTextFile(new File("D:\\SElab\\lab1\\code\\testcase\\testcase1.txt"));
+        DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
+        assertEquals("The bridge words from \"aiyo\" to \"yoyo\" are: biubiu, boomboom.",graph.queryBridgeWords(word1,word2));
+    }
 }

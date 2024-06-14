@@ -53,7 +53,7 @@ public class Lab1 implements Callable<Integer> {
         }
 
         if(showGraph){
-            System.out.println(GraphConverter.showDirectedGraph(graph));
+            GraphConverter.showDirectedGraph(graph);
         }
 
         if(words != null){
