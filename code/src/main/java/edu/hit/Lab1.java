@@ -13,7 +13,7 @@ public class Lab1 implements Callable<Integer> {
 
 
     @CommandLine.Option(names = {"-s","--src"},description = "absolute path of source text file",required = true)
-    private File srcFile;
+    private File[] srcFile;
 
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true, description = "display a help message")
     private boolean helpRequested;
@@ -42,7 +42,7 @@ public class Lab1 implements Callable<Integer> {
     @Override
     public Integer call() {
 
-        String processedText = TextProcessor.processTextFile(srcFile);
+        String processedText = TextProcessor.processTextFile(srcFile[0]);
         DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
 
         if(dstFile != null){
@@ -53,7 +53,7 @@ public class Lab1 implements Callable<Integer> {
         }
 
         if(showGraph){
-            GraphConverter.showDirectedGraph(graph);
+            System.out.println(GraphConverter.showDirectedGraph(graph));
         }
 
         if(words != null){
@@ -64,7 +64,8 @@ public class Lab1 implements Callable<Integer> {
                 System.out.println(graph.queryBridgeWords(twoWords[0],twoWords[1]));
 
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                //e.printStackTrace();
 
             }
         }
@@ -82,7 +83,8 @@ public class Lab1 implements Callable<Integer> {
                     throw new Exception("wrong number of calculate words");
                 System.out.println(graph.calcShortestPath(twoWords[0],twoWords[1]));
             }catch (Exception e){
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                //e.printStackTrace();
             }
 
         }
@@ -91,7 +93,8 @@ public class Lab1 implements Callable<Integer> {
             try (FileWriter writer = new FileWriter(randomWalkFile)) {
                 writer.write(randomPath);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                //e.printStackTrace();
             }
         }
 
@@ -104,7 +107,12 @@ public class Lab1 implements Callable<Integer> {
 
 
     public static void main(String[] args) {
-        new CommandLine(new Lab1()).execute(args);
+
+        try{
+        new CommandLine(new Lab1()).execute(args);}
+        catch(RuntimeException e){
+            e.printStackTrace();
+        }
     }
 
 }

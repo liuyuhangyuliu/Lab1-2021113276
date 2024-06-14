@@ -28,6 +28,7 @@ public class TextProcessor {
             // 关闭文件
             scanner.close();
         } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
