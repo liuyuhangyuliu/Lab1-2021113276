@@ -43,17 +43,26 @@ public class GraphConverter {
 
 
     // 输出有向图
+
     public static void showDirectedGraph(DirectedGraph graph) {
+
+        StringBuilder stringBuilder = new StringBuilder();
         //System.out.println(graph.toString());
         if(Objects.equals(graph.toString(), "{={}}")) return;
+
         for (String node : graph.keySet()) {
-            System.out.print(node + ": ");
+            stringBuilder.append(node + ": ");
+            //System.out.print(node + ": ");
             Map<String, Integer> neighbors =  graph.get(node);
             for (String neighbor : neighbors.keySet()) {
-                System.out.print(neighbor + "(" + neighbors.get(neighbor) + ") ");
+                stringBuilder.append(neighbor + "(" + neighbors.get(neighbor) + ") ");
+                //System.out.print(neighbor + "(" + neighbors.get(neighbor) + ") ");
             }
-            System.out.println();
+            stringBuilder.append("\n");
+            //System.out.println();
         }
+
     }
+
 }
 

@@ -36,8 +36,10 @@ public class TextProcessor {
             // 关闭文件
             scanner.close();
         } catch (FileNotFoundException e) {
+
             System.out.println("错误：文件不存在");
             //e.printStackTrace();
+
         }
 
         // 返回处理后的文本内容

@@ -1,16 +1,21 @@
 package edu.hit;
 
 import junit.framework.TestCase;
+import org.junit.Test;
 import picocli.CommandLine;
 
 import java.io.File;
 
 public class Lab1Test extends TestCase {
 
+
+    @Test
     public void test(){
+
 
         String processedText = TextProcessor.processTextFile();
         DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
+
     }
 
     public  void test1(){
@@ -19,5 +24,9 @@ public class Lab1Test extends TestCase {
         System.out.println(graph.queryBridgeWords("explore","new"));
         //GraphConverter.showDirectedGraph(graph);
         //GenerateImg.generate(graph,new File("D:\\SElab\\lab1\\code\\directed_graph.png"));
+    }
+
+    public void generateGraphTest(){
+
     }
 }
