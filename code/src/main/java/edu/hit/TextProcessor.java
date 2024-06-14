@@ -9,12 +9,20 @@ import java.util.Scanner;
 public class TextProcessor {
 
     //文本处理
-    public static String processTextFile(File file) {
+    public static String processTextFile(File ... files) {
+        if(files.length != 1){
+            System.out.println("错误：输入文件数量不符");
+            return null;
+        }
         StringBuilder stringBuilder = new StringBuilder();
-
+        String fileName = files[0].getName();
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        if(!suffix.equals(".txt")) {
+            System.out.println("错误：文件类型不符");
+        }
         try {
             // 打开文件
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(files[0]);
 
             // 逐行读取文件内容并处理
             while (scanner.hasNextLine()) {
@@ -28,7 +36,8 @@ public class TextProcessor {
             // 关闭文件
             scanner.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("错误：文件不存在");
+            //e.printStackTrace();
         }
 
         // 返回处理后的文本内容

@@ -3,11 +3,13 @@ package edu.hit; /**
  */
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class GraphConverter {
 
     //转化为有向图
     public static DirectedGraph convertTextToGraph(String processedText) {
+        if(processedText == null) return null;
         DirectedGraph graph = new DirectedGraph();
 
         // 将处理好的文本字符串按空格分割为单词数组
@@ -42,6 +44,8 @@ public class GraphConverter {
 
     // 输出有向图
     public static void showDirectedGraph(DirectedGraph graph) {
+        //System.out.println(graph.toString());
+        if(Objects.equals(graph.toString(), "{={}}")) return;
         for (String node : graph.keySet()) {
             System.out.print(node + ": ");
             Map<String, Integer> neighbors =  graph.get(node);

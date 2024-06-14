@@ -9,7 +9,8 @@ public class Lab1Test extends TestCase {
 
     public void test(){
 
-        new CommandLine(new Lab1()).execute("-s","D:\\SElab\\lab1\\code\\testcase\\testcase1.txt","-q");
+        String processedText = TextProcessor.processTextFile();
+        DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
     }
 
     public  void test1(){
