@@ -48,7 +48,7 @@ public class DirectedGraphTest{
         String word2 = "yourself";
         String processedText = TextProcessor.processTextFile(new File("D:\\SElab\\lab1\\code\\testcase\\testcase1.txt"));
         DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
-        assertEquals("No \"yeye\" or \"yourself\" in the graph!",graph.queryBridgeWords(word1,word2));
+        assertEquals("No bridge words from \"yeye\" to \"yourself\"!",graph.queryBridgeWords(word1,word2));
     }
 
     @Test

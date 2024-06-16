@@ -12,13 +12,14 @@ public class TextProcessor {
     public static String processTextFile(File ... files) {
         if(files.length != 1){
             System.out.println("错误：输入文件数量不符");
-            return null;
+            return "错误：输入文件数量不符";
         }
         StringBuilder stringBuilder = new StringBuilder();
         String fileName = files[0].getName();
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         if(!suffix.equals(".txt")) {
             System.out.println("错误：文件类型不符");
+            return "错误：文件类型不符";
         }
         try {
             // 打开文件
@@ -38,6 +39,7 @@ public class TextProcessor {
         } catch (FileNotFoundException e) {
 
             System.out.println("错误：文件不存在");
+            return "错误：文件不存在";
             //e.printStackTrace();
 
         }
