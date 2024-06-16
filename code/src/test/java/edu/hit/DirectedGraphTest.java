@@ -41,6 +41,33 @@ public class DirectedGraphTest{
         DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
         assertEquals("No \"you\" or \"damn\" in the graph!",graph.queryBridgeWords(word1,word2));
     }
+
+    @Test
+    public void queryBridgeWordsTest3() {
+        String word1 = "yeye";
+        String word2 = "yourself";
+        String processedText = TextProcessor.processTextFile(new File("D:\\SElab\\lab1\\code\\testcase\\testcase1.txt"));
+        DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
+        assertEquals("No \"yeye\" or \"yourself\" in the graph!",graph.queryBridgeWords(word1,word2));
+    }
+
+    @Test
+    public void queryBridgeWordsTest4() {
+        String word1 = "spend";
+        String word2 = "people";
+        String processedText = TextProcessor.processTextFile(new File("D:\\SElab\\lab1\\code\\testcase\\testcase1.txt"));
+        DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
+        assertEquals("No bridge words from \"spend\" to \"people\"!",graph.queryBridgeWords(word1,word2));
+    }
+
+    @Test
+    public void queryBridgeWordsTest5() {
+        String word1 = "time";
+        String word2 = "people";
+        String processedText = TextProcessor.processTextFile(new File("D:\\SElab\\lab1\\code\\testcase\\testcase1.txt"));
+        DirectedGraph graph = GraphConverter.convertTextToGraph(processedText);
+        assertEquals("The bridge words from \"time\" to \"people\" are: with.",graph.queryBridgeWords(word1,word2));
+    }
     @Test
     public void queryBridgeWordsTest6() {
         String word1 = "aiyo";
